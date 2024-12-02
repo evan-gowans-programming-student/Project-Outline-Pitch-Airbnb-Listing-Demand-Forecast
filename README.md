@@ -1,5 +1,3 @@
-# Project-Outline-Pitch-Airbnb-Listing-Demand-Forecast
-
 # Project Outline: Airbnb Listing Demand Forecast
 
 ---
