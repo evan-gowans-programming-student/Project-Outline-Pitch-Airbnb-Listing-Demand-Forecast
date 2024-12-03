@@ -11,39 +11,61 @@ Develop a predictive model to forecast Airbnb demand by analyzing historical boo
 Hosts face significant challenges in predicting demand for their Airbnb listings, especially during fluctuating seasons and local events. Without clear insights, they often underprice or overprice their properties, leading to missed revenue opportunities or decreased occupancy. This project aims to leverage historical and external data to predict demand trends and provide actionable recommendations for dynamic pricing strategies.
 
 ---
+# Plan for Integration: Airbnb and Holidays API
 
-## Objectives
-1. **Analyze Historical Trends in Occupancy and Pricing**  
-   Use Airbnb historical data to identify patterns in booking rates, price fluctuations, and review trends.
-
-2. **Evaluate Seasonality's Impact on Demand**  
-   Examine how specific months, holidays, or seasons affect booking behavior in different cities.
-
-3. **Incorporate Local Events into Demand Modeling**  
-   Integrate data from local event APIs (e.g., concerts, sports games, festivals) to assess their influence on demand spikes.
-
-4. **Develop a Time-Series Forecasting Model**  
-   Implement ARIMA or Prophet models to predict future booking demand based on historical patterns.
-
-5. **Quantify the Influence of Geographic Location**  
-   Assess the role of neighborhood characteristics (proximity to attractions, transport access) in determining occupancy rates.
-
-6. **Analyze Dynamic Pricing Strategies**  
-   Compare how demand forecasts align with current pricing strategies, identifying opportunities for price adjustments.
-
-7. **Create Interactive Visualizations for Forecasted Trends**  
-   Build dashboards using Python libraries (e.g., Plotly, Dash) to visualize future demand by neighborhood and time period.
-
-8. **Recommend Optimized Pricing for Hosts**  
-   Provide tailored suggestions for pricing strategies to maximize revenue and occupancy rates during high-demand and low-demand periods.
+## Objective
+To analyze the impact of holidays on Airbnb rental prices and occupancy rates, utilizing the Airbnb `calendar.csv` data and integrating it with the Holidays API. This will allow us to quantify how holiday seasons influence rental rates and booking trends in Albany, New York.
 
 ---
 
-## What's the Pitch?
-Accurate demand forecasting benefits both hosts and travelers. Hosts gain the ability to price their properties strategically, ensuring maximum revenue while maintaining competitive rates. Travelers benefit from optimized availability and fair pricing. This project adds value to the Airbnb ecosystem by aligning supply with demand through actionable data insights.
+## Data-Minded Questions
+1. What are the average price increases during holidays compared to non-holiday periods?
+2. Which holidays have the highest impact on Airbnb booking rates?
+3. Are certain neighborhoods more affected by holiday pricing spikes than others?
+4. How does the occupancy rate change during specific holidays like Christmas or New Year?
+5. What is the lead time for bookings during holiday periods compared to non-holiday periods?
+6. Do holidays influence cancellation rates or the availability of listings?
+7. Are price increases consistent across various property types (e.g., apartments, houses)?
+8. What is the price elasticity during holidays—how much do rates increase before demand drops?
+9. Are there recurring patterns in booking behavior for holidays across different years?
+10. How do holiday price trends in Albany compare to non-holiday weeks?
 
 ---
 
+## Steps for Integration
+### 1. Data Exploration and Cleaning
+- Load the `calendar.csv` data to explore pricing, availability, and date fields.
+- Identify missing data and handle null values appropriately.
+- Parse the date fields to standardize and enable date-based analysis.
+
+### 2. Fetch Holiday Data
+- Use the [Calendarific API](https://calendarific.com/) to fetch a comprehensive list of holidays for Albany, New York, for the relevant year(s).
+- Extract key fields from the API response:
+  - **Holiday Name**
+  - **Holiday Date**
+  - **Holiday Type** (e.g., federal, religious, public)
+  
+### 3. Merge Airbnb Data with Holiday Data
+- Match the holiday dates with the `calendar.csv` dates.
+- Create a binary column in the Airbnb data to indicate whether a date falls on a holiday (`is_holiday`).
+- Include additional metadata, such as holiday type, to enable deeper segmentation.
+
+### 4. Price and Occupancy Analysis
+- Calculate the average price difference for listings during holidays vs. non-holidays.
+- Compare occupancy rates on holidays vs. non-holidays.
+- Generate descriptive statistics (mean, median, standard deviation) for price and availability changes during holidays.
+
+### 5. Neighborhood-Level Analysis
+- Group the data by neighborhood and calculate average holiday price increases for each neighborhood.
+- Identify neighborhoods with the highest and lowest holiday impact.
+
+### 6. Visualization
+- Use Python visualization libraries (e.g., Matplotlib, Seaborn, Plotly) to present:
+  - Price trends during holiday and non-holiday periods.
+  - Heatmaps showing neighborhoods with the largest holiday impacts.
+  - Time-series plots to highlight how prices evolve leading up to and following major holidays.
+
+---
 ## Library (Data Sources to Leverage)
 
 ### Publicly Available Databases:
